@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  h1 Books
+  p
+    a(class="button" href="/books/new") Create New Book
+
+  form(action="/books" method="post")
+    input(name="search" type="text" placeholder="Find a book")
+    input(class="button" type="submit" value="Search")
+
+  if books.length === 0
+    p No books found!
+    a(class="button" href="/books") Show all
+  else
+    table
+      thead
+        tr
+          th Title
+          th Author
+          th Genre
+          th Year
+      tbody
+        each book in books
+          tr
+            td
+              a(href=`/books/${book.id}`)= book.title
+            td= book.author
+            td= book.genre
+            td= book.year
+
+    if pageNumbers > 1
+      ul.pagination
+        - var i = 1;
+        while i <= pageNumbers
+          li
+            a(href=`/books?page=${i}`)= i++

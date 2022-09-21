@@ -10,16 +10,16 @@ block content
         li= error.message
 
   form(action="/books/new", method="post")
-    p
+    div.flex
       label(for="title") Title
       input(name="title" type="text" id="title" value=book ? book.title : '' autofocus)
-    p
+    div.flex
       label(for="author") Author
       input(name="author" type="text" id="author" value=book ? book.author : '')
-    p
+    div.flex
       label(for="genre") Genre
       input(name="genre" type="text" id="genre" value=book ? book.genre : '')
-    p
+    div.flex
       label(for="year") Year
       input(name="year" type="text" id="year" value=book ? book.year : '')
     p

@@ -13,7 +13,6 @@ const asyncHandler = cb => async (req, res, next) => {
 }
 
 const createError = (status) => {
-  console.log('create error fired');
   const error = new Error();
   error.status = status;
   throw error;
@@ -82,13 +81,18 @@ router.get('/books/:id', asyncHandler(async (req, res) => {
 
 /* POST edit book */
 router.post('/books/:id', asyncHandler(async (req, res) => {
-  const book = await Book.findByPk(req.params.id);
+  let book = await Book.findByPk(req.params.id);
 
-  if (book) {
+  try {
     await book.update(req.body);
     res.redirect('/books');
-  } else {
-    createError(404);
+  } catch (error) {
+    if (error.name === 'SequelizeValidationError') {
+      book = await Book.build(req.body);
+      res.render(`update-book`, { book, errors: error.errors });
+    } else {
+      createError(500);
+    }
   }
 }));
 

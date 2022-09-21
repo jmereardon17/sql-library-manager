@@ -8,8 +8,6 @@ const asyncHandler = cb => async (req, res, next) => {
   try {
     await cb(req, res, next);
   } catch (error) {
-    console.log('async handler error');
-    console.log('error', error);
     next(error); // Pass error to global error handler
   }
 }

@@ -11,4 +11,4 @@ Extras for the Exceeds Expectations Grading:
   - Year
 - Include pagination for the books listing page.
 
-Grade: TBC
+Grade: Exceeds Expectations
